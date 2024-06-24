@@ -1,0 +1,8 @@
+<h1>Reserve um horário</h1>
+
+<form action="/reservar" method="post">
+    <input type="text" name="nome" placeholder="Seu nome" required>
+    <input type="date" name="data" required>
+    <input type="time" name="hora" required>
+    <input type="submit" value="Reservar" onclick="return confirm('Deseja realizar esta reserva?');">
+</form>
