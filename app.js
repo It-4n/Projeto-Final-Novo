@@ -36,6 +36,14 @@ app.get('/reservar', (req, res) => {
     res.render('reservar');
 });
 
+app.get('/sobre', (req, res) => {
+    res.render('sobre');
+});
+
+app.get('/editar', (req, res) => {
+    res.render('editar');
+});
+
 app.post('/reservar', (req, res) => {
     Reserva.create({
         nome: req.body.nome,
@@ -48,12 +56,37 @@ app.post('/reservar', (req, res) => {
     });
 });
 
-app.get('/sobre', (req, res) => {
-    res.render('sobre');
+app.get('/admreservas', (req, res) => {
+    Reserva.findAll()
+        .then(reservas => {
+            res.render('admreservas', { reservas: reservas });
+        })
+        .catch(err => {
+            res.render('admreservas', { erro: 'Erro ao buscar reservas:' + err });
+        });
 });
 
-app.get('/editar', (req, res) => {
-    res.render('editar');
+app.post('/registrar', (req, res) => {
+    Usuario.create({
+        name: req.body.name,
+        telefone: req.body.telefone,
+        email: req.body.email,
+        senha: req.body.senha
+    }).then(usuarios => {
+        res.redirect('/login');
+    }).catch(err => {
+        res.render('login', { erro: 'Error ao cadastrar:' + err });
+    });
+});
+
+app.get('/admreservas', (req, res) => {
+    Usuario.findAll()
+        .then(usuarios => {
+            res.render('admreservas', { usuarios: usuarios });
+        })
+        .catch(err => {
+            res.render('admreservas', { erro: 'Erro ao buscar reservas:' + err });
+        });
 });
 
 app.get('/editar/:id', (req, res) => {
@@ -103,19 +136,6 @@ app.post('/editar/:id', (req, res) => {
     });
 });
 
-app.get('/admreservas', (req, res) => {
-    res.render('admreservas');
-});
-
-app.get('/admreservas', (req, res) => {
-    Reserva.findAll()
-        .then(reservas => {
-            res.render('admreservas', { reservas: reservas });
-        })
-        .catch(err => {
-            res.render('admreservas', { erro: 'Erro ao buscar reservas:' + err });
-        });
-});
 
 app.get('/admreservas/:id', (req, res) => {
     Reserva.destroy({ where: { id: req.params.id } })
@@ -136,19 +156,6 @@ app.post('/login', (req, res) => {
 
 app.get('/registrar', (req, res) => {
     res.render('registrar');
-});
-
-app.post('/registrar', (req, res) => {
-    Usuario.create({
-        name: req.body.name,
-        telefone: req.body.telefone,
-        email: req.body.email,
-        senha: req.body.senha
-    }).then(usuarios => {
-        res.redirect('/login');
-    }).catch(err => {
-        res.render('login', { erro: 'Error ao cadastrar:' + err });
-    });
 });
 
 app.listen(4444, () => {

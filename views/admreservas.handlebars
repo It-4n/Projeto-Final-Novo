@@ -1,10 +1,16 @@
 <h1>Tabela de reservas</h1>
 
-        {{#each reservas}}
-                <p>Nome: {{nome}}</p>
-                <p>Data: {{data}}</p>
-                <p>Horário: {{hora}}</p>
+{{#each reservas}}
+        <p>Nome: {{nome}}</p>
+        <p>Data: {{data}}</p>
+        <p>Horário: {{hora}}</p>
 
-                <a href="/editar/{{id}}">Editar</a>
-                <a href="/admreservas/{{id}}" onclick="return confirm('Deseja APAGAR esta reserva?')">Deletar</a>
-        {{/each}}
+        <a href="/editar/{{id}}">Editar</a>
+        <a href="/admreservas/{{id}}" onclick="return confirm('Deseja APAGAR esta reserva?')">Deletar</a>
+{{/each}}
+
+{{#each usuarios}}
+        <p>Nome: {{name}}</p>
+        <p>E-mail: {{email}}</p>
+        <p>Senha: {{senha}}</p>
+{{/each}}
