@@ -1,6 +1,6 @@
 const express = require('express');
-// const multer = require('multer');
 const bp = require('body-parser');
+const moment = require('moment');
 // const session = require('express-session');
 const { engine } = require('express-handlebars');
 const Reserva = require('./models/reserva');
@@ -59,13 +59,15 @@ app.post('/reservar', (req, res) => {
 app.get('/admreservas', (req, res) => {
     Reserva.findAll()
         .then(reservas => {
+            reservas.forEach(reserva => {
+                reserva.dataFormatada = moment(reserva.data).format('DD/MM/YYYY');
+            });
             res.render('admreservas', { reservas: reservas });
         })
         .catch(err => {
             res.render('admreservas', { erro: 'Erro ao buscar reservas:' + err });
         });
 });
-
 app.post('/registrar', (req, res) => {
     console.log('Dados recebidos:', req.body);
 
