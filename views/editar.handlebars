@@ -1,6 +1,6 @@
 <h1>Editar reserva</h1>
 
-<form action="/editar/:id" method="post">
+<form action="/editar/{{req.params.id}}" method="post">
     <label for="nome">Nome:</label>
     <input type="text" name="nome" value={{reservas.nome}}>
    

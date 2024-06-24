@@ -96,9 +96,7 @@ app.get('/admreservas', (req, res) => {
 });
 
 app.get('/editar/:id', (req, res) => {
-    const id = req.params.id
-
-    Reserva.findByPk(id)
+    Reserva.findByPk(req.params.id)
         .then(reservas => {
             if (reservas) {
                 res.render('editar', { reservas: reservas });
@@ -112,12 +110,6 @@ app.get('/editar/:id', (req, res) => {
 });
 
 app.post('/editar/:id', (req, res) => {
-    const id = req.params.id;
-
-    if (isNaN(id)) {
-        return res.send('ID inválido');
-    }
-
     console.log('ID recebido:', id);
     console.log('Dados recebidos:', req.body);
 
@@ -126,16 +118,8 @@ app.post('/editar/:id', (req, res) => {
             data: req.body.data,
             hora: req.body.hora
         },
-        { where: { id: id } }
+        { where: { id: req.params.id } }
     )
-    .then(linhasAtt => {
-        if (linhasAtt > 0) {
-            console.log('Registro atualizado com sucesso: ' + linhasAtt + ' linhas afetadas');
-            res.redirect('/admreservas');
-        } else {
-            throw new Error('Reserva não encontrada ou nenhum registro atualizado');
-        }
-    })
     .catch(error => {
         console.error('Erro ao atualizar reserva:', error);
         res.send('Erro ao atualizar reserva: ' + error.message);
