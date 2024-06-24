@@ -7,7 +7,7 @@ const Usuario = database.define('usuarios', {
         allowNull: false
     },
     telefone: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: false
     },
     email: {

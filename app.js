@@ -67,15 +67,19 @@ app.get('/admreservas', (req, res) => {
 });
 
 app.post('/registrar', (req, res) => {
+    console.log('Dados recebidos:', req.body);
+
     Usuario.create({
         name: req.body.name,
         telefone: req.body.telefone,
         email: req.body.email,
         senha: req.body.senha
     }).then(usuarios => {
+        console.log('Usuário criado:', usuarios);
         res.redirect('/login');
     }).catch(err => {
-        res.render('login', { erro: 'Error ao cadastrar:' + err });
+        console.error('Erro ao cadastrar:', err);
+        res.render('login', { erro: 'Error ao cadastrar: ' + err });
     });
 });
 
