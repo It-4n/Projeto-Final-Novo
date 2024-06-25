@@ -6,11 +6,11 @@ const bcrypt = require('bcrypt');
 const passport = require('passport');
 const initializePassport = require('./passport-config');
 const session = require('express-session');
-const { engine } = require('express-handlebars');
 const Reserva = require('./models/reserva');
 const Usuario = require('./models/usuario');
-const app = express();
 const flash = require('express-flash');
+const { engine } = require('express-handlebars');
+const app = express();
 
 initializePassport(
     passport, 
