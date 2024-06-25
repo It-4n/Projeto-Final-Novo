@@ -1,4 +1,4 @@
-const dotenv = require('dotenv'.config());
+const dotenv = require('dotenv').config();
 const express = require('express');
 const bp = require('body-parser');
 const moment = require('moment');
