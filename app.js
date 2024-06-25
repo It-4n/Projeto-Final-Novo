@@ -1,7 +1,4 @@
-// if (process.env.NODE_ENV !== 'production') {
-//     require('dotenv'.config())
-// }
-
+const dotenv = require('dotenv').config();
 const express = require('express');
 const bp = require('body-parser');
 const moment = require('moment');
@@ -9,11 +6,18 @@ const bcrypt = require('bcrypt');
 const passport = require('passport');
 const initializePassport = require('./passport-config');
 const session = require('express-session');
-const { engine } = require('express-handlebars');
 const Reserva = require('./models/reserva');
 const Usuario = require('./models/usuario');
-const app = express();
 const flash = require('express-flash');
+const { engine } = require('express-handlebars');
+const app = express();
+
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: { maxAge: 2 * 60 * 1000 }
+}));
 
 initializePassport(
     passport, 
@@ -24,12 +28,6 @@ app.use(bp.urlencoded({ extended: false }));
 app.use(bp.json());
 app.use(express.static('./public'));
 app.use(flash());
-app.use(session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-    cookie: { maxAge: 2 * 60 * 1000 }
-}));
 app.use(passport.initialize());
 app.use(passport.session());
 
