@@ -120,7 +120,7 @@ app.post('/editar/:id', (req, res) => {
             data: req.body.data,
             hora: req.body.hora
         },
-        { where: { id: id } }
+        { where: { id: req.params.id } }
     )
     .catch(error => {
         console.error('Erro ao atualizar reserva:', error);
