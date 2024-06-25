@@ -70,6 +70,13 @@ app.get('/registrar', (req, res) => {
     res.render('registrar');
 });
 
+// Rota de autenticação
+app.post('/login', passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '/login',
+    failureFlash: true
+}));
+
 app.post('/reservar', (req, res) => {
     Reserva.create({
         nome: req.body.nome,
@@ -155,12 +162,6 @@ app.get('/admreservas/:id', (req, res) => {
     });
 });
 
-// Rota de autenticação
-app.post('/login', passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/login',
-    failureFlash: true
-}));
 
 // Inicialização do servidor
 app.listen(4444, () => {
