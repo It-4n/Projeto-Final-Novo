@@ -12,18 +12,21 @@ const flash = require('express-flash');
 const { engine } = require('express-handlebars');
 const app = express();
 
+// Configuração de sessão
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-    cookie: { maxAge: 2 * 60 * 1000 }
+    cookie: { maxAge: 2 * 60 * 1000 } // Tempo de expiração do cookie de sessão
 }));
 
-initializePassport(
-    passport, 
-    email => users.find(user => user.email === email)
-)
+// Inicialização do Passport
+initializePassport(passport, 
+    email => Usuario.find(user => user.email === email),
+    id => Usuario.find(user => user.id === id)
+);
 
+// Middlewares
 app.use(bp.urlencoded({ extended: false }));
 app.use(bp.json());
 app.use(express.static('./public'));
@@ -31,6 +34,7 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
+// Configuração do Handlebars
 app.set('view engine', 'handlebars');
 app.set('views', './views');
 app.engine('handlebars', engine({
@@ -41,6 +45,7 @@ app.engine('handlebars', engine({
     },
 }));
 
+// Rotas
 app.get('/', (req, res) => {
     res.render('home');
 });
@@ -57,114 +62,107 @@ app.get('/editar', (req, res) => {
     res.render('editar');
 });
 
-app.post('/reservar', (req, res) => {
-    Reserva.create({
-        nome: req.body.nome,
-        data: req.body.data,
-        hora: req.body.hora
-    }).then(reservas => {
-        res.redirect('/admreservas');
-    }).catch(err => {
-        res.render('admreservas', { erro: 'Error ao criar reserva:' + err });
-    });
-});
-
-app.get('/admreservas', (req, res) => {
-    Reserva.findAll()
-        .then(reservas => {
-            reservas.forEach(reserva => {
-                reserva.dataFormatada = moment(reserva.data).format('DD/MM/YYYY');
-            });
-            res.render('admreservas', { reservas: reservas });
-        })
-        .catch(err => {
-            res.render('admreservas', { erro: 'Erro ao buscar reservas:' + err });
-        });
-});
-app.post('/registrar', async (req, res) => {
-    const hashSenha = await bcrypt.hash(req.body.senha, 10);
-
-    Usuario.create({
-        name: req.body.name,
-        telefone: req.body.telefone,
-        email: req.body.email,
-        senha: hashSenha
-    }).then(usuarios => {
-        res.redirect('/login');
-    }).catch(err => {
-        console.error('Erro ao cadastrar:', err);
-        res.render('login', { erro: 'Error ao cadastrar: ' + err });
-    });
-
-    console.log(usuarios);
-});
-
-app.get('/admreservas', (req, res) => {
-    Usuario.findAll()
-        .then(usuarios => {
-            res.render('admreservas', { usuarios: usuarios });
-        })
-        .catch(err => {
-            res.render('admreservas', { erro: 'Erro ao buscar reservas:' + err });
-        });
-});
-
-app.get('/editar/:id', (req, res) => {
-    Reserva.findByPk(req.params.id)
-        .then(reservas => {
-            if (reservas) {
-                res.render('editar', { reservas: reservas });
-            } else {
-                res.send('Reserva não encontrada');
-            }
-        })
-        .catch(error => {
-            res.send('Erro ao buscar reserva: ' + error.message);
-        });
-});
-
-app.post('/editar/:id', (req, res) => {
-    const id = req.params.id
-
-    console.log('ID recebido:', id);
-    console.log('Dados recebidos:', req.body);
-
-    Reserva.update({
-        nome: req.body.nome,
-        data: req.body.data,
-        hora: req.body.hora
-    },
-        { where: { id: id } }
-    )
-        .catch(error => {
-            console.error('Erro ao atualizar reserva:', error);
-            res.send('Erro ao atualizar reserva: ' + error.message);
-        });
-});
-
-app.get('/admreservas/:id', (req, res) => {
-    Reserva.destroy({ where: { id: req.params.id } })
-        .then(function () {
-            res.redirect('/admreservas');
-        }).catch(function (erro) {
-            res.send('Erro ao excluir a reserva');
-        });
-});
-
-app.get('/login', passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/login',
-    failureFlash: true
-}));
-
-app.post('/login', (req, res) => {
-
+app.get('/login', (req, res) => {
+    res.render('login');
 });
 
 app.get('/registrar', (req, res) => {
     res.render('registrar');
 });
 
+app.post('/reservar', (req, res) => {
+    Reserva.create({
+        nome: req.body.nome,
+        data: req.body.data,
+        hora: req.body.hora
+    })
+    .then(reservas => {
+        res.redirect('/admreservas');
+    })
+    .catch(err => {
+        console.error('Erro ao criar reserva:', err);
+        res.render('admreservas', { erro: 'Erro ao criar reserva: ' + err.message });
+    });
+});
+
+app.get('/admreservas', (req, res) => {
+    Reserva.findAll()
+    .then(reservas => {
+        reservas.forEach(reserva => {
+            reserva.dataFormatada = moment(reserva.data).format('DD/MM/YYYY');
+        });
+        res.render('admreservas', { reservas: reservas });
+    })
+    .catch(err => {
+        console.error('Erro ao buscar reservas:', err);
+        res.render('admreservas', { erro: 'Erro ao buscar reservas: ' + err.message });
+    });
+});
+
+app.post('/registrar', async (req, res) => {
+    const { name, telefone, email, senha } = req.body;
+
+    try {
+        const hashSenha = await bcrypt.hash(senha, 10);
+        await Usuario.create({ name, telefone, email, senha: hashSenha });
+        res.redirect('/login');
+    } catch (error) {
+        console.error('Erro ao cadastrar:', error);
+        res.render('registrar', { erro: 'Erro ao cadastrar: ' + error.message });
+    }
+});
+
+app.get('/editar/:id', (req, res) => {
+    Reserva.findByPk(req.params.id)
+    .then(reservas => {
+        if (reservas) {
+            res.render('editar', { reservas: reservas });
+        } else {
+            res.send('Reserva não encontrada');
+        }
+    })
+    .catch(error => {
+        console.error('Erro ao buscar reserva:', error);
+        res.send('Erro ao buscar reserva: ' + error.message);
+    });
+});
+
+app.post('/editar/:id', (req, res) => {
+    const id = req.params.id;
+
+    Reserva.update({
+        nome: req.body.nome,
+        data: req.body.data,
+        hora: req.body.hora
+    }, { where: { id: id } })
+    .then(() => {
+        res.redirect('/admreservas');
+    })
+    .catch(error => {
+        console.error('Erro ao atualizar reserva:', error);
+        res.send('Erro ao atualizar reserva: ' + error.message);
+    });
+});
+
+app.get('/admreservas/:id', (req, res) => {
+    Reserva.destroy({ where: { id: req.params.id } })
+    .then(() => {
+        res.redirect('/admreservas');
+    })
+    .catch(erro => {
+        console.error('Erro ao excluir a reserva:', erro);
+        res.send('Erro ao excluir a reserva: ' + erro.message);
+    });
+});
+
+// Rota de autenticação
+app.post('/login', passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '/login',
+    failureFlash: true
+}));
+
+// Inicialização do servidor
 app.listen(4444, () => {
     console.log("Servidor rodando em http://localhost:4444");
 });
