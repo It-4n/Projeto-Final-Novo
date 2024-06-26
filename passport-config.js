@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 const bcrypt = require('bcrypt');
 const localStrategy = require('passport-local').Strategy;
 const Usuario = require('./models/usuario');
+=======
+const bcrypt = require('bcryptjs');
+const localStrategy = require('passport-local').Strategy;
+const Usuario = require('../models/Usuario');
+>>>>>>> 5f0ef27b39371fb048e414b3cbc622d8d326e8f8
 
 module.exports = function(passport) {
     passport.use(new localStrategy({
@@ -53,4 +59,8 @@ module.exports = function(passport) {
             done(error, null);
         }
     });
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> 5f0ef27b39371fb048e414b3cbc622d8d326e8f8
