@@ -1,8 +1,56 @@
-<h1>Reserve um horário</h1>
+<section id="book-a-table" class="book-a-table section">
 
-<form action="/reservar" method="post">
-    <input type="text" name="nome" placeholder="Seu nome" required>
-    <input type="date" name="data" required>
-    <input type="time" name="hora" required>
-    <input type="submit" value="Reservar" onclick="return confirm('Confirma o agendamento desta reserva?');">
-</form>
+    <!-- Section Title -->
+    <div class="container section-title">
+        <h2>Reserve um horário</h2>
+        <p><span>Reserve Seu Horário</span> <span class="description-title">Conosco<br></span></p>
+    </div><!-- End Section Title -->
+
+    <div class="container">
+
+        <div class="row g-0" data-aos-delay="100">
+
+            <div class="col-lg-4 reservation-img" style="background-image: url(img/reservation.jpg);"></div>
+
+            <div class="col-lg-8 d-flex align-items-center reservation-form-bg" data-aos-delay="200">
+                <form action="/reservar" method="post">
+                    <div class="row gy-4">
+                        <div class="col-lg-4 col-md-6">
+                            <input type="text" name="nome" class="form-control" id="name" placeholder="Your Name"
+                                required="">
+                        </div>
+
+                        <div class="col-lg-4 col-md-6">
+                            <input type="date" class="form-control" name="data" id="date" placeholder="01/01/2000"
+                                required="">
+                        </div>
+
+                        <div class="col-lg-4 col-md-6">
+                            <input type="time" class="form-control" name="hora" id="time" placeholder="00:00"
+                                required="">
+                        </div>
+
+                        <div class="col-lg-4 col-md-6">
+                            <input type="text" class="form-control" name="phone" id="phone" placeholder="Seu Telefone"
+                                required="">
+                        </div>
+                            
+                        <div class="col-lg-4 col-md-6">
+                            <input type="number" class="form-control" name="people" id="people"
+                                placeholder="Número de Pessoas" required="">
+                        </div>
+
+                        <div class="form-group mt-3">
+                            <textarea class="form-control" name="message" rows="5" placeholder="Message"></textarea>
+                        </div>
+
+                        <div class="text-center"><button type="submit">Reservar</button></div>
+                    </div>
+                </form>
+            </div><!-- End Reservation Form -->
+
+        </div>
+
+    </div>
+
+</section><!-- /Book A Table Section -->

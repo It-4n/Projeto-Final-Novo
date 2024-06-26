@@ -54,8 +54,8 @@ app.get('/reservar', (req, res) => {
     res.render('reservar');
 });
 
-app.get('/sobre', (req, res) => {
-    res.render('sobre');
+app.get('#about', (req, res) => {
+    res.render('about');
 });
 
 app.get('/editar', (req, res) => {
@@ -72,10 +72,29 @@ app.get('/registrar', (req, res) => {
 
 // Rota de autenticação
 app.post('/login', passport.authenticate('local', {
-    successRedirect: '/',
+    successRedirect: '/admreservas',
     failureRedirect: '/login',
-    failureFlash: true
+    failureFlash: false
 }));
+
+async function criarAdmin() {
+    try {
+        const email = 'teste@teste.com';
+        const senha = 'teste';
+        const hashSenha = await bcrypt.hash(senha, 10);
+
+        const usuarioExistente = await Usuario.findOne({ where: { email } });
+        if (usuarioExistente) {
+            console.log('Administrador já existe.');
+            return;
+        }
+
+        await Usuario.create({ email, senha: hashSenha });
+        console.log('Administrador criado com sucesso.');
+    } catch (error) {
+        console.error('Erro ao criar administrador:', error.message);
+    }
+}
 
 app.post('/reservar', (req, res) => {
     Reserva.create({
@@ -84,7 +103,7 @@ app.post('/reservar', (req, res) => {
         hora: req.body.hora
     })
     .then(reservas => {
-        res.redirect('/admreservas');
+        res.redirect('/');
     })
     .catch(err => {
         console.error('Erro ao criar reserva:', err);
