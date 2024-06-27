@@ -1,3 +1,30 @@
+<style>
+    button {
+        margin-top: 50px;
+    }
+    .row {
+        display: flex;
+        justify-content: center;
+    }
+
+    input[type=password] {
+        font-size: 14px;
+        box-shadow: none;
+        border-radius: 0;
+        color: var(--default-color);
+        background-color: color-mix(in srgb, var(--background-color), transparent 20%);
+        border-color: color-mix(in srgb, var(--default-color), transparent 80%);
+    }
+
+    input[type=password]:focus {
+        border-color: var(--accent-color);
+    }
+
+    input[type=password]::placeholder {
+        color: color-mix(in srgb, var(--default-color), transparent 70%);
+    }
+</style>
+
 <section id="book-a-table" class="book-a-table section">  
     <div class="container section-title">
         <h2>Entre</h2>

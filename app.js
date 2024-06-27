@@ -75,8 +75,8 @@ app.post('/login', passport.authenticate('local', {
 
 async function criarAdmin() {
     try {
-        const email = 'teste@teste.com';
-        const senha = 'teste';
+        const email = 'adm@adm';
+        const senha = '123';
         const hashSenha = await bcrypt.hash(senha, 10);
 
         const usuarioExistente = await Usuario.findOne({ where: { email } });
@@ -176,7 +176,6 @@ app.get('/admreservas/:id', (req, res) => {
         res.send('Erro ao excluir a reserva: ' + erro.message);
     });
 });
-
 
 // Inicialização do servidor
 app.listen(4444, () => {

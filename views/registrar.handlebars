@@ -1,3 +1,27 @@
+<style>
+    button {
+        margin-top: 50px;
+    }
+
+    input[type=password] {
+        font-size: 14px;
+        padding: 10px 15px;
+        box-shadow: none;
+        border-radius: 0;
+        color: var(--default-color);
+        background-color: color-mix(in srgb, var(--background-color), transparent 20%);
+        border-color: color-mix(in srgb, var(--default-color), transparent 80%);
+    }
+
+    input[type=password]:focus {
+        border-color: var(--accent-color);
+    }
+
+    input[type=password]::placeholder {
+        color: color-mix(in srgb, var(--default-color), transparent 70%);
+    }
+</style>
+
 <section id="book-a-table" class="book-a-table section">
     <div class="container section-title">
         <h2>Cadastrar</h2>
@@ -17,16 +41,16 @@
                             <input type="text" name="name" class="form-control" id="nome" placeholder="Seu Nome"
                                 required="">
                         </div>
-                        <div class="col-lg-4 col-md-6">
+                        {{!-- <div class="col-lg-4 col-md-6">
                             <input type="number" class="form-control" name="telefone" id="telefone"
                                 placeholder="Seu Telefone" required="">
-                        </div>
+                        </div> --}}
                         <div class="col-lg-4 col-md-6">
                             <input type="email" class="form-control" name="email" id="email" placeholder="Seu E-mail"
                                 required="">
                         </div>
                         <div class="col-lg-4 col-md-6">
-                            <input type="password" name="senha" class="form-control" id="senha" placeholder="Sua Senha"
+                            <input type="password" class="form-control" name="senha" id="senha" placeholder="Sua Senha"
                                 required="">
                         </div>
                     </div>
