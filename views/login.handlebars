@@ -1,11 +1,32 @@
-<h1>Login</h1>
+<section id="book-a-table" class="book-a-table section">  
+    <div class="container section-title">
+        <h2>Entre</h2>
+        <p><span>Faça Seu</span> <span class="description-title">Login<br></span></p>
+    </div>
 
-<form action="/login" method="post">
-    <label for="email">E-mail: </label>
-    <input type="email" name="email" id="email" required>
-    <label for="senha">Senha: </label>
-    <input type="password" name="senha" id="senha" required>
-    <button type="submit">Login</button>
-</form>
+    <div class="container">
 
-Não possui uma conta? <a href="/registrar">Cadastre-se agora!</a>
+        <div class="row g-0">
+
+            <div class="col-lg-4 reservation-img" style="background-image: url(img/reservation.jpg);"></div>
+
+            <div class="col-lg-8 d-flex align-items-center reservation-form-bg">
+                <form action="/login" method="post" role="form" class="php-email-form">
+                    <div class="row gy-4">
+                        <div class="col-lg-4 col-md-6">
+                            <input type="email" class="form-control" name="email" id="email" placeholder="Seu E-mail"
+                                required="">
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <input type="password" name="senha" class="form-control" id="senha" placeholder="Sua Senha"
+                                required="">
+                        </div>
+                    </div>
+                    <div class="text-center"><button type="submit">Login</button></div>
+                </form>
+            </div>
+
+        </div>
+        Não possui uma conta? <a href="/registrar">Cadastre-se</a>
+    </div>
+</section>

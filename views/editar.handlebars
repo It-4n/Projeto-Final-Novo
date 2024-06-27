@@ -3,12 +3,12 @@
 <form action="/editar/{{reservas.id}}" method="post" class>
     <label for="nome">Nome:</label>
     <input type="text" name="nome" value="{{reservas.nome}}">
-   
+
     <label for="data">Data:</label>
     <input type="date" name="data" value="{{reservas.data}}">
-   
+
     <label for="hora">Hora:</label>
     <input type="time" name="hora" value="{{reservas.hora}}">
-   
+
     <input type="submit" value="Atualizar" onclick="return confirm('Deseja ATUALIZAR esta reserva?');">
 </form>

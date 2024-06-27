@@ -1,10 +1,56 @@
-<h1>Tabela de reservas</h1>
+<style>
+        table,
+        tr,
+        th {
+                border: 1px solid black;
+        }
+
+        .tabela {
+                display: flex;
+                justify-content: center;
+        }
+
+        .tabela h1 {
+                margin: 50px;
+                margin-bottom: 40px;
+        }
+
+        .tabela table {
+                margin: 50px;
+                margin-top: 10px;
+                margin-bottom: 0px;
+        }
+
+        .tabela a {
+                margin: 5px;
+                margin-bottom: 50px;
+        }
+</style>
+
+<div class="tabela">
+        <h1>Reservas Feitas</h1>
+</div>
 
 {{#each reservas}}
-        <p>Nome: {{nome}}</p>
-        <p>Data: {{dataFormatada}}</p>
-        <p>Horário: {{hora}}</p>
+<div class="tabela">
+        <table style="width: 33%; border: 2px solid rgba(0, 0, 0, 0.801)">
+                <tr style="text-align: center;">
+                        <th>Nome:</th>
+                        <td>{{nome}}</td>
+                </tr>
+                <tr style="text-align: center;">
+                        <th>Data:</th>
+                        <td>{{dataFormatada}}</td>
+                </tr>
+                <tr style="text-align: center;">
+                        <th>Horário:</th>
+                        <td>{{hora}}</td>
+                </tr>
+        </table>
+</div>
 
+<div class="tabela">
         <a href="/editar/{{id}}">Editar</a>
         <a href="/admreservas/{{id}}" onclick="return confirm('Deseja APAGAR esta reserva?')">Deletar</a>
+</div>
 {{/each}}

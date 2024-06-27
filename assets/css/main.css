@@ -1383,17 +1383,17 @@ section,
   background: color-mix(in srgb, var(--default-color), transparent 97%);
 }
 
-.book-a-table .php-email-form {
+.book-a-table .form {
   padding: 30px;
 }
 
 @media (max-width: 575px) {
-  .book-a-table .php-email-form {
+  .book-a-table .form {
     padding: 20px;
   }
 }
 
-.book-a-table .php-email-form .error-message {
+.book-a-table .form {
   display: none;
   background: #df1529;
   color: #ffffff;
@@ -1403,7 +1403,7 @@ section,
   font-weight: 600;
 }
 
-.book-a-table .php-email-form .sent-message {
+.book-a-table .form {
   display: none;
   color: #ffffff;
   background: #059652;
@@ -1413,7 +1413,7 @@ section,
   font-weight: 600;
 }
 
-.book-a-table .php-email-form .loading {
+.book-a-table .form{
   display: none;
   background: var(--background-color);
   text-align: center;
@@ -1421,7 +1421,7 @@ section,
   margin-bottom: 24px;
 }
 
-.book-a-table .php-email-form .loading:before {
+.book-a-table .form {
   content: "";
   display: inline-block;
   border-radius: 50%;
@@ -1433,12 +1433,12 @@ section,
   animation: animate-loading 1s linear infinite;
 }
 
-.book-a-table .php-email-form input[type=text],
-.book-a-table .php-email-form input[type=email],
-.book-a-table .php-email-form input[type=number],
-.book-a-table .php-email-form input[type=date],
-.book-a-table .php-email-form input[type=time],
-.book-a-table .php-email-form textarea {
+.book-a-table .form input[type=text],
+.book-a-table .form input[type=email],
+.book-a-table .form input[type=number],
+.book-a-table .form input[type=date],
+.book-a-table .form input[type=time],
+.book-a-table .form textarea {
   font-size: 14px;
   padding: 10px 15px;
   box-shadow: none;
@@ -1448,25 +1448,25 @@ section,
   border-color: color-mix(in srgb, var(--default-color), transparent 80%);
 }
 
-.book-a-table .php-email-form input[type=text]:focus,
-.book-a-table .php-email-form input[type=email]:focus,
-.book-a-table .php-email-form input[type=number]:focus,
-.book-a-table .php-email-form input[type=date]:focus,
-.book-a-table .php-email-form input[type=time]:focus,
-.book-a-table .php-email-form textarea:focus {
+.book-a-table .form input[type=text]:focus,
+.book-a-table .form input[type=email]:focus,
+.book-a-table .form input[type=number]:focus,
+.book-a-table .form input[type=date]:focus,
+.book-a-table .form input[type=time]:focus,
+.book-a-table .form textarea:focus {
   border-color: var(--accent-color);
 }
 
-.book-a-table .php-email-form input[type=text]::placeholder,
-.book-a-table .php-email-form input[type=email]::placeholder,
-.book-a-table .php-email-form input[type=number]::placeholder,
-.book-a-table .php-email-form input[type=date]::placeholder,
-.book-a-table .php-email-form input[type=time]::placeholder,
-.book-a-table .php-email-form textarea::placeholder {
+.book-a-table .form input[type=text]::placeholder,
+.book-a-table .form input[type=email]::placeholder,
+.book-a-table .form input[type=number]::placeholder,
+.book-a-table .form input[type=date]::placeholder,
+.book-a-table .form input[type=time]::placeholder,
+.book-a-table .form textarea::placeholder {
   color: color-mix(in srgb, var(--default-color), transparent 70%);
 }
 
-.book-a-table .php-email-form button[type=submit] {
+.book-a-table .form button[type=submit] {
   color: var(--contrast-color);
   background: var(--accent-color);
   border: 0;
@@ -1475,7 +1475,7 @@ section,
   border-radius: 50px;
 }
 
-.book-a-table .php-email-form button[type=submit]:hover {
+.book-a-table .form button[type=submit]:hover {
   background: color-mix(in srgb, var(--accent-color), transparent 20%);
 }
 
@@ -1587,19 +1587,19 @@ section,
   color: var(--accent-color);
 }
 
-.contact .php-email-form {
+.contact .form {
   box-shadow: 0px 0px 20px color-mix(in srgb, var(--default-color), transparent 90%);
   padding: 30px;
   margin-top: 30px;
 }
 
 @media (max-width: 575px) {
-  .contact .php-email-form {
+  .contact .form {
     padding: 20px;
   }
 }
 
-.contact .php-email-form .error-message {
+.contact .form .error-message {
   display: none;
   background: #df1529;
   color: #ffffff;
@@ -1609,7 +1609,7 @@ section,
   font-weight: 600;
 }
 
-.contact .php-email-form .sent-message {
+.contact .form .sent-message {
   display: none;
   color: #ffffff;
   background: #059652;
@@ -1619,7 +1619,7 @@ section,
   font-weight: 600;
 }
 
-.contact .php-email-form .loading {
+.contact .form .loading {
   display: none;
   background: var(--background-color);
   text-align: center;
@@ -1627,7 +1627,7 @@ section,
   margin-bottom: 24px;
 }
 
-.contact .php-email-form .loading:before {
+.contact .form .loading:before {
   content: "";
   display: inline-block;
   border-radius: 50%;
@@ -1639,9 +1639,9 @@ section,
   animation: animate-loading 1s linear infinite;
 }
 
-.contact .php-email-form input[type=text],
-.contact .php-email-form input[type=email],
-.contact .php-email-form textarea {
+.contact .form input[type=text],
+.contact .form input[type=email],
+.contact .form textarea {
   color: var(--default-color);
   background-color: color-mix(in srgb, var(--background-color), transparent 50%);
   border-color: color-mix(in srgb, var(--default-color), transparent 80%);
@@ -1651,19 +1651,19 @@ section,
   border-radius: 0;
 }
 
-.contact .php-email-form input[type=text]:focus,
-.contact .php-email-form input[type=email]:focus,
-.contact .php-email-form textarea:focus {
+.contact .form input[type=text]:focus,
+.contact .form input[type=email]:focus,
+.contact .form textarea:focus {
   border-color: var(--accent-color);
 }
 
-.contact .php-email-form input[type=text]::placeholder,
-.contact .php-email-form input[type=email]::placeholder,
-.contact .php-email-form textarea::placeholder {
+.contact .form input[type=text]::placeholder,
+.contact .form input[type=email]::placeholder,
+.contact .form textarea::placeholder {
   color: color-mix(in srgb, var(--default-color), transparent 70%);
 }
 
-.contact .php-email-form button[type=submit] {
+.contact .form button[type=submit] {
   color: var(--contrast-color);
   background: var(--accent-color);
   border: 0;
@@ -1672,7 +1672,7 @@ section,
   border-radius: 50px;
 }
 
-.contact .php-email-form button[type=submit]:hover {
+.contact .form button[type=submit]:hover {
   background: color-mix(in srgb, var(--accent-color), transparent 20%);
 }
 

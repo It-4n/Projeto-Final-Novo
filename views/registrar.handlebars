@@ -1,19 +1,40 @@
-<h1>Registre-se agora</h1>
+<section id="book-a-table" class="book-a-table section">
+    <div class="container section-title">
+        <h2>Cadastrar</h2>
+        <p><span>Cadastre-se</span> <span class="description-title">Agora<br></span></p>
+    </div>
 
-<form action="/registrar" method="post">
-    <label for="name">Nome: </label>
-    <input type="text" name="name" required>
+    <div class="container">
 
-    <label for="telefone">Telefone: </label>
-    <input type="number" name="telefone" required>
+        <div class="row g-0">
 
-    <label for="email">E-mail: </label>
-    <input type="email" name="email" required>
+            <div class="col-lg-4 reservation-img" style="background-image: url(img/reservation.jpg);"></div>
 
-    <label for="senha">Senha: </label>
-    <input type="password" name="senha" required>
+            <div class="col-lg-8 d-flex align-items-center reservation-form-bg">
+                <form action="/registrar" method="post" role="form" class="php-email-form">
+                    <div class="row gy-4">
+                        <div class="col-lg-4 col-md-6">
+                            <input type="text" name="name" class="form-control" id="nome" placeholder="Seu Nome"
+                                required="">
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <input type="number" class="form-control" name="telefone" id="telefone"
+                                placeholder="Seu Telefone" required="">
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <input type="email" class="form-control" name="email" id="email" placeholder="Seu E-mail"
+                                required="">
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <input type="password" name="senha" class="form-control" id="senha" placeholder="Sua Senha"
+                                required="">
+                        </div>
+                    </div>
+                    <div class="text-center"><button type="submit">Cadastre-se</button></div>
+                </form>
+            </div>
 
-    <input type="submit" value="Cadastrar">
-</form>
-
-Já possui uma conta? <a href="/login">Entre</a>
+        </div>
+        Já possui uma conta? <a href="/login">Entre</a>
+    </div>
+</section>
